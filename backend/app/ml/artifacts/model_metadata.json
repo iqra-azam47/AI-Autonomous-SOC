@@ -1,0 +1,140 @@
+{
+  "active_model_name": "RandomForest",
+  "version": "v1.0.0",
+  "algorithm": "Ensemble (RandomForest + Isolation Forest)",
+  "dataset_name": "Cybersecurity Intrusion Telemetry Benchmark v1",
+  "dataset_records": 5000,
+  "train_records": 4000,
+  "test_records": 1000,
+  "features": [
+    "duration",
+    "src_bytes",
+    "dst_bytes",
+    "src_port",
+    "dst_port",
+    "protocol_num",
+    "count_10s",
+    "srv_count_10s",
+    "failed_logins",
+    "is_privileged",
+    "outbound_bytes_rate"
+  ],
+  "label_classes": [
+    "MALICIOUS",
+    "NORMAL",
+    "SUSPICIOUS"
+  ],
+  "attack_categories": [
+    "BRUTE_FORCE",
+    "DATA_EXFILTRATION",
+    "NORMAL",
+    "PORT_SCAN",
+    "PRIVILEGE_ESCALATION",
+    "SUSPICIOUS_LOGIN",
+    "WEB_ATTACK"
+  ],
+  "selected_metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "roc_auc": 1.0,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": [
+      [
+        340,
+        0,
+        0
+      ],
+      [
+        0,
+        600,
+        0
+      ],
+      [
+        0,
+        0,
+        60
+      ]
+    ]
+  },
+  "candidate_comparisons": {
+    "LogisticRegression": {
+      "accuracy": 0.995,
+      "precision": 0.995,
+      "recall": 0.995,
+      "f1_score": 0.995,
+      "roc_auc": 1.0,
+      "false_positive_rate": 0.0,
+      "confusion_matrix": [
+        [
+          338,
+          0,
+          2
+        ],
+        [
+          0,
+          600,
+          0
+        ],
+        [
+          2,
+          1,
+          57
+        ]
+      ]
+    },
+    "RandomForest": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "false_positive_rate": 0.0,
+      "confusion_matrix": [
+        [
+          340,
+          0,
+          0
+        ],
+        [
+          0,
+          600,
+          0
+        ],
+        [
+          0,
+          0,
+          60
+        ]
+      ]
+    },
+    "GradientBoosting": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1_score": 1.0,
+      "roc_auc": 1.0,
+      "false_positive_rate": 0.0,
+      "confusion_matrix": [
+        [
+          340,
+          0,
+          0
+        ],
+        [
+          0,
+          600,
+          0
+        ],
+        [
+          0,
+          0,
+          60
+        ]
+      ]
+    }
+  },
+  "trained_at": "2026-09-28T14:04:55.636833+00:00",
+  "status": "ACTIVE"
+}
