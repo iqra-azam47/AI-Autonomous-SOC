@@ -46,7 +46,15 @@ class Settings(BaseSettings):
     def cors_origins_list(self) -> List[str]:
         if not self.CORS_ORIGINS:
             return ["*"]
-        return [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
+        origins = []
+        for origin in self.CORS_ORIGINS.split(","):
+            cleaned = origin.strip()
+            if cleaned:
+                # Browser Origin headers never contain a trailing slash (RFC 6454 Section 6.2)
+                origins.append(cleaned.rstrip("/"))
+                if cleaned.endswith("/"):
+                    origins.append(cleaned)
+        return list(dict.fromkeys(origins))
 
     @property
     def clean_database_url(self) -> str:

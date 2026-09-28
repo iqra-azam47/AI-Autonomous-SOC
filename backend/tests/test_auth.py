@@ -29,3 +29,10 @@ def test_get_current_user_profile(client):
     me_data = me_resp.json()
     assert me_data["username"] == "analyst"
     assert me_data["role_name"] == "ANALYST"
+
+def test_cors_origin_normalization():
+    from app.core.config import Settings
+    s = Settings(CORS_ORIGINS="https://frontend.onrender.com/, http://localhost:5173 / ")
+    # Must contain origin without trailing slash per RFC 6454 browser serialization
+    assert "https://frontend.onrender.com" in s.cors_origins_list
+
