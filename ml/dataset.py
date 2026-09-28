@@ -159,9 +159,11 @@ def generate_cybersecurity_dataset(n_samples: int = 5000, random_state: int = 42
     return df
 
 if __name__ == "__main__":
-    os.makedirs("ml/data", exist_ok=True)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(base_dir, "data")
+    os.makedirs(data_dir, exist_ok=True)
     df = generate_cybersecurity_dataset(5000)
-    out_path = "ml/data/cybersecurity_traffic.csv"
+    out_path = os.path.join(data_dir, "cybersecurity_traffic.csv")
     df.to_csv(out_path, index=False)
     print(f"Generated {len(df)} records saved to {out_path}")
     print("Class distribution:")

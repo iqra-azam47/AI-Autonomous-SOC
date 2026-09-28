@@ -5,7 +5,11 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-sys.path.insert(0, os.path.abspath("backend"))
+# Ensure backend root is always in sys.path regardless of execution working directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+backend_dir = os.path.abspath(os.path.join(current_dir, ".."))
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
 
 from app.core.database import Base, get_db
 from app.main import app, seed_initial_data

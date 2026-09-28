@@ -25,12 +25,17 @@ from sklearn.metrics import (
 )
 
 def run_training_pipeline():
-    os.makedirs("ml/data", exist_ok=True)
-    os.makedirs("backend/app/ml/artifacts", exist_ok=True)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.abspath(os.path.join(base_dir, ".."))
+    data_dir = os.path.join(base_dir, "data")
+    artifacts_dir = os.path.join(repo_root, "backend", "app", "ml", "artifacts")
 
-    csv_path = "ml/data/cybersecurity_traffic.csv"
+    os.makedirs(data_dir, exist_ok=True)
+    os.makedirs(artifacts_dir, exist_ok=True)
+
+    csv_path = os.path.join(data_dir, "cybersecurity_traffic.csv")
     if not os.path.exists(csv_path):
-        from ml.dataset import generate_cybersecurity_dataset
+        from dataset import generate_cybersecurity_dataset
         df = generate_cybersecurity_dataset(5000)
         df.to_csv(csv_path, index=False)
     else:
@@ -130,8 +135,7 @@ def run_training_pipeline():
     iso_forest = IsolationForest(n_estimators=100, contamination=0.10, random_state=42)
     iso_forest.fit(X_train_scaled)
 
-    # Save artifacts
-    artifacts_dir = "backend/app/ml/artifacts"
+    # Save artifacts using absolute path
     joblib.dump(scaler, os.path.join(artifacts_dir, "scaler.joblib"))
     joblib.dump(best_clf, os.path.join(artifacts_dir, "best_classifier.joblib"))
     joblib.dump(cat_clf, os.path.join(artifacts_dir, "category_classifier.joblib"))
